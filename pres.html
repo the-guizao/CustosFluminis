@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Projeto Sentinela do Rio Doce</title>
+    <!-- Framework da apresentação -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <!-- Tema e estilo de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/serif.min.css" id="theme">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css">
+    <!-- Script para renderizar LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Estilos personalizados com paleta pastel -->
+    <style>
+        :root {
+            --r-background-color: #fdf6e3; /* Base Creme */
+            --r-main-font: "Georgia", "Cambria", serif;
+            --r-heading-font: "Georgia", "Cambria", serif;
+            --r-main-color: #586e75; /* Cinza-azulado escuro */
+            --r-heading-color: #cb4b16; /* Laranja queimado */
+            --r-link-color: #268bd2; /* Azul */
+            --r-code-font: "Consolas", "Monaco", monospace;
+        }
+        .reveal .slides section img {
+            max-height: 450px;
+            margin: 15px auto;
+            display: block;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .reveal h1, .reveal h2, .reveal h3 {
+            text-transform: none;
+            font-weight: 600;
+        }
+        .reveal p, .reveal li {
+            text-align: left;
+            font-size: 28px;
+            line-height: 1.4;
+        }
+        .reveal section .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 25px;
+        }
+        .reveal section .col {
+            flex: 1;
+        }
+        .reveal pre code {
+            border-radius: 8px;
+            padding: 20px !important;
+            font-size: 20px !important;
+            max-height: 450px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .reveal .math-formula {
+            margin: 20px 0;
+            font-size: 1.1em;
+            text-align: center;
+            color: #859900; /* Verde */
+        }
+        .reveal blockquote {
+            background: #eee8d5; /* Creme escuro */
+            border-left: 5px solid #cb4b16;
+            padding: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide de Título -->
+            <section>
+                <h1 style="font-size: 2.8em; color: #b58900;">Custos Fluminis - Sentinela do Rio</h1>
+                <p style="text-align: center; font-size: 1.1em; margin-top: 20px;">Uma Análise Preditiva da Saúde da Mata Ciliar e seus Vetores Climáticos Utilizando Aprendizagem de Máquina</p>
+                <br>
+                <p style="text-align: center;"><strong>Apresentado por:</strong> Prof. Me. Guilherme Schultz Netto, Colégio Marista Colatina</p>
+                <p style="text-align: center;"><strong>Observatório Marista do Clima</strong></p>
+            </section>
+
+            <!-- Slide do Problema -->
+            <section>
+                <h2>O Problema e a Hipótese de Trabalho</h2>
+                <ul>
+                    <li>A bacia do Rio Doce representa um ecossistema de extrema relevância nacional, encontrando-se em contínuo desafio de recuperação ecológica.</li>
+                    <li>A avaliação da saúde da vegetação ciliar (APP) é complexa, sendo tradicionalmente limitada a estudos de campo pontuais e de baixa escala.</li>
+                    <li class="fragment"><strong>Questão de Investigação:</strong> É possível, através da fusão de dados de sensoriamento remoto e modelos avançados de Machine Learning, construir um sistema de monitorização contínua que não só quantifique a tendência da saúde ecológica, mas também identifique e preveja o impacto dos seus principais vetores climáticos e atmosféricos?</li>
+                </ul>
+            </section>
+
+            <!-- Slide de Metodologia -->
+            <section>
+                <h2>Arquitetura Metodológica e Tecnológica</h2>
+                <div class="container">
+                    <div class="col">
+                        <h4>Fontes de Dados</h4>
+                        <ul>
+                            <li><strong>Vegetação (NDVI):</strong> Copernicus Sentinel-2</li>
+                            <li><strong>Precipitação:</strong> CHIRPS Daily</li>
+                            <li><strong>Temperatura:</strong> NASA GLDAS</li>
+                            <li><strong>Emissões (Proxy):</strong> Copernicus Sentinel-5P (CO e Índice de Aerossol)</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4>Ferramentas</h4>
+                        <ul>
+                            <li><strong>Processamento Geoespacial em Nuvem:</strong> Google Earth Engine (GEE)</li>
+                            <li><strong>Análise e Modelagem:</strong> Python 3</li>
+                            <li><strong>Bibliotecas Chave:</strong> Pandas, Scikit-learn, TensorFlow (Keras), Seaborn</li>
+                        </ul>
+                    </div>
+                </div>
+                <small class="fragment">O fluxo de trabalho adotado foi o de processamento assíncrono, onde o GEE exporta a série temporal final, que é subsequentemente analisada num ambiente local para a modelagem preditiva.</small>
+            </section>
+
+            <!-- Slide do NDVI -->
+            <section>
+                <h3>Métrica Primária: O Índice de Vegetação (NDVI)</h3>
+                <p>A saúde e o vigor da vegetação foram quantificados pelo <strong>Índice de Vegetação por Diferença Normalizada (NDVI)</strong>. Este índice baseia-se na reflectância diferencial da vegetação nos espectros do vermelho (Red) e do infravermelho próximo (NIR).</p>
+                <div class="math-formula">
+                    $$ NDVI = \frac{\left(NIR - Red\right)}{\left(NIR + Red\right)} $$
+                </div>
+                <p>O NDVI varia entre -1 e +1. Valores positivos elevados indicam maior densidade de clorofila e, consequentemente, vegetação mais vigorosa.</p>
+                <small><strong>Área de Estudo:</strong> Um polígono vetorial preciso foi definido para isolar a análise exclusivamente à APP urbana do Rio Doce em Colatina, ES.</small>
+            </section>
+
+            <!-- Slide das Variáveis Exógenas -->
+            <section>
+                <h3>Variáveis Exógenas: Clima e Atmosfera</h3>
+                <p>Para criar um modelo explicativo, foram integradas quatro variáveis ambientais como regressores:</p>
+                <ul>
+                    <li><strong>Precipitação Total Mensal (mm):</strong> Soma da precipitação diária (CHIRPS).</li>
+                    <li><strong>Temperatura Média Mensal (°C):</strong> Média da temperatura (GLDAS).</li>
+                    <li><strong>Monóxido de Carbono (mol/m²):</strong> Média mensal da densidade da coluna de CO (Sentinel-5P), um proxy para emissões por combustão.</li>
+                    <li><strong>Índice de Aerossol Absorvente:</strong> Média mensal (Sentinel-5P), um proxy para fuligem e poeira com efeito de aquecimento.</li>
+                </ul>
+                <p class="fragment">A unificação de cinco séries temporais com frequências e resoluções distintas num único DataFrame mensal consistente foi o principal desafio da etapa de preparação de dados.</p>
+            </section>
+
+            <!-- Slide da Evolução da Análise -->
+            <section data-transition="slide-in fade-out">
+                <h2>Evolução da Análise Preditiva</h2>
+                <p>A investigação seguiu uma abordagem iterativa, aumentando a complexidade dos modelos para aprofundar a compreensão do sistema.</p>
+                <ol>
+                    <li class="fragment"><strong>Análise de Tendência Linear:</strong> A primeira abordagem para identificar a direção geral.</li>
+                    <li class="fragment"><strong>Análise de Correlação:</strong> Investigação da multicolinearidade entre as variáveis.</li>
+                    <li class="fragment"><strong>Modelagem com LSTM:</strong> Utilização de Redes Neurais Recorrentes para capturar dependências temporais complexas.</li>
+                </ol>
+            </section>
+            
+            <!-- Slide Tendências Lineares -->
+            <section>
+                <h3>Iteração I: Análise de Tendência Linear</h3>
+                <p>Modelos de Regressão Linear foram aplicados para determinar a tendência de longo prazo (2018-2025) do NDVI e da temperatura.</p>
+                <div class="container">
+                    <div class="col">
+                        <h4>Tendência do NDVI</h4>
+                        <!-- INCLUIR IMAGEM 1 AQUI: grafico_1_tendencia_ndvi.png -->
+                        <p><strong>Observação:</strong> Uma tendência linear ligeiramente positiva, sugerindo uma recuperação contínua da vegetação.</p>
+                    </div>
+                    <div class="col">
+                        <h4>Tendência da Temperatura</h4>
+                        <!-- INCLUIR IMAGEM 2 AQUI: grafico_2_tendencia_temperatura.png -->
+                        <p><strong>Observação:</strong> Uma clara e estatisticamente significativa tendência de aquecimento, alinhada com as tendências climáticas globais.</p>
+                    </div>
+                </div>
+                <blockquote class="fragment">Esta análise inicial revelou um aparente paradoxo: como pode a vegetação melhorar enquanto a temperatura, um fator de stress, aumenta consistentemente?</blockquote>
+            </section>
+
+            <!-- Slide Correlação -->
+            <section>
+                <h3>Iteração II: Investigação das Inter-relações</h3>
+                <p>Para entender as forças motrizes por trás das previsões, geramos matrizes de correlação para as variáveis. A análise investigou a relação entre os fatores climáticos e o NDVI, e entre as emissões e a temperatura.</p>
+                 <!-- INCLUIR IMAGEM 3 AQUI: A matriz de correlação NDVI vs Fatores -->
+                <blockquote>O resultado mais notável foi a forte correlação negativa entre a temperatura e o NDVI ($\rho = -0.52$), indicando que meses mais quentes estão fortemente associados a uma vegetação menos vigorosa. A correlação com as emissões também se mostrou positiva em relação à temperatura.</blockquote>
+            </section>
+
+            <!-- Slide LSTM -->
+            <section>
+                <h3>Iteração III: Modelagem com Redes Neurais LSTM</h3>
+                <p>Para capturar as relações não-lineares e as dependências temporais (como o efeito atrasado da chuva), implementámos um modelo de <strong>Rede Neural Recorrente do tipo Long Short-Term Memory (LSTM)</strong>.</p>
+                <ul>
+                    <li>A arquitetura LSTM é ideal para séries temporais, pois possui "portões" (gates) que lhe permitem "lembrar" seletivamente informações de passos de tempo anteriores.</li>
+                    <li>O modelo foi treinado para prever o valor do mês \(t+1\) com base numa sequência dos 6 meses anteriores (\(t, t-1, ..., t-5\)) de todas as 5 variáveis.</li>
+                    <li>A previsão futura foi gerada de forma auto-regressiva, utilizando um cenário de "ano climatologicamente normal" para as variáveis exógenas.</li>
+                </ul>
+            </section>
+
+            <!-- Slide Resultados LSTM: Temperatura -->
+            <section>
+                <h2>Resultados da Previsão LSTM: Temperatura</h2>
+                <p>A previsão da LSTM para a temperatura, sobreposta à tendência linear e a uma média móvel mais robusta, confirma a trajetória de aquecimento.</p>
+                <!-- INCLUIR IMAGEM 4 AQUI: grafico_lstm_previsao_temperatura_com_tendencias.jpg -->
+                <p class="fragment">A linha de tendência de média móvel (azul) suaviza a variabilidade interanual e mostra de forma inequívoca o aquecimento subjacente, validando a importância desta variável como um forçador climático local.</p>
+            </section>
+            
+            <!-- Slide Resultados LSTM: NDVI -->
+            <section>
+                <h2>Resultados da Previsão LSTM: NDVI</h2>
+                <p>Este é o resultado central do projeto. O modelo LSTM, ao considerar a complexa interação de todos os fatores, conta uma história diferente da regressão linear.</p>
+                 <!-- INCLUIR IMAGEM 5 AQUI: O seu gráfico final do NDVI com as zonas coloridas -->
+                <blockquote class="fragment">A previsão da LSTM (linha vermelha) não sustenta a tendência linear otimista. Em vez disso, projeta uma estabilização seguida de um declínio, levando a vegetação para a zona de "stress". O modelo aprendeu que o efeito negativo do aquecimento contínuo está a superar os ganhos de recuperação.</blockquote>
+            </section>
+
+            <!-- Slide Conclusões -->
+            <section>
+                <h2>Conclusões e Implicações</h2>
+                <ol>
+                    <li><strong>Validação Local do Aquecimento Global:</strong> A análise confirma uma tendência de aquecimento clara e mensurável na área de estudo, correlacionada com indicadores de emissões atmosféricas.</li>
+                    <li class="fragment"><strong>O Paradoxo da Recuperação Resolvido:</strong> A aparente recuperação da vegetação (tendência linear) é um artefacto estatístico. O modelo preditivo avançado (LSTM) indica que a resiliência do ecossistema está a atingir um limite, com o stress térmico a tornar-se o fator dominante.</li>
+                    <li class="fragment"><strong>Potencial como Ferramenta de Ação Climática:</strong> Esta metodologia representa um protótipo de "Sentinela Climática" de baixo custo e alta precisão. Pode ser escalada para monitorizar outras bacias hidrográficas, avaliar a eficácia de projetos de reflorestamento e servir como um sistema de alerta precoce para o stress dos ecossistemas.</li>
+                </ol>
+            </section>
+            
+             <!-- Slide Publicação e Agradecimentos -->
+            <section>
+                <h2>Ineditismo e Próximos Passos</h2>
+                 <p>A combinação de múltiplas fontes de dados de satélite (vegetação, clima e atmosfera) com modelos de Deep Learning (LSTM) para realizar uma previsão localizada da saúde de um ecossistema específico constitui uma abordagem com alto grau de ineditismo, com potencial para publicação científica.</p>
+                <h3 style="margin-top: 40px;">Muito Obrigado!</h3>
+                 <p style="text-align:center;">Questões?</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Scripts do Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            width: 1920,
+            height: 1080,
+            margin: 0.04,
+            transition: 'slide', // fade, slide, convex, concave, zoom
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+</body>
+</html>
