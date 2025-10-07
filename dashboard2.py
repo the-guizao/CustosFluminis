@@ -182,8 +182,14 @@ fig.add_vline(x=df_to_plot['date'].max(), line_width=2, line_dash="dash", line_c
 
 fig.update_layout(
     title=f'Simulação de Cenários Climáticos Futuros com {model_choice}',
-    xaxis_title='Data', yaxis_title='NDVI', legend_title='Legenda',
-    height=600, template='plotly_dark'
+    xaxis_title='Data', yaxis_title='NDVI', legend=dict(
+        x=0.5,  # Center the legend horizontally
+        y=-0.2, # Position the legend below the plot area
+        xanchor='center', # Anchor the legend's x-coordinate to its center
+        yanchor='top', # Anchor the legend's y-coordinate to its top
+        orientation='h' # Arrange legend items horizontally
+    ), legend_title='Legenda',
+    height=600, template='plotly_white'
 )
 
 st.plotly_chart(fig, use_container_width=True)
@@ -192,5 +198,6 @@ st.markdown("---")
 st.markdown("Desenvolvido no âmbito do Projeto Sentinela do Rio Doce - Marista Colatina")
 st.markdown("Desenvolvido pelo Professor Me. Guilherme Schultz Netto")
 st.image("grafico_3_editado.png")
+
 
 
