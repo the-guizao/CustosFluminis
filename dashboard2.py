@@ -20,13 +20,13 @@ from tensorflow.keras.layers import LSTM, Dense
 import warnings
 warnings.filterwarnings('ignore')
 
-# --- CONFIGURAÇÃO DA PÁGINA ---
+#pagelayout
 st.set_page_config(layout="wide", page_title="Custos Fluminis")
 
 st.title("🛰️ Custos Fluminis: Dashboard Interativo")
 st.markdown("Uma ferramenta para simulação de cenários climáticos futuros para a saúde da vegetação (NDVI) da APP de Colatina, ES.")
 
-# --- FUNÇÕES DE CACHE PARA PERFORMANCE ---
+#cache
 @st.cache_data
 def load_data(file_path):
     df_raw = pd.read_csv(file_path)
@@ -43,7 +43,7 @@ def train_xgb_model(df):
     df_model['month'] = df_model['date'].dt.month
     df_model['year'] = df_model['date'].dt.year
     
-    # Definimos as features aqui
+    #features
     features = ['year', 'month', 'precipitacao_total_mes', 'temp_media_mes', 'co_media_mensal', 'aerosol_media_mensal']
     X = df_model[features]
     y = df_model['ndvi']
@@ -55,7 +55,7 @@ def train_xgb_model(df):
 
 @st.cache_resource
 def train_lstm_model(df):
-    st.info("Treinando modelo LSTM... (executado apenas uma vez, pode demorar um pouco)")
+    st.info("Treinando modelo LSTM")
     scaler = MinMaxScaler(feature_range=(0, 1))
     scaled_data = scaler.fit_transform(df)
     scaler_ndvi = MinMaxScaler(feature_range=(0, 1))
@@ -82,14 +82,14 @@ def train_lstm_model(df):
     
     return model, df_model, scaler, scaler_ndvi, look_back
 
-# --- CARREGAMENTO DOS DADOS ---
+#data
 try:
     data = load_data('sentinela_dados_finais.csv')
 except FileNotFoundError:
     st.error("ERRO: Ficheiro 'sentinela_dados_finais.csv' não encontrado.")
     st.stop()
 
-# --- PAINEL DE CONTROLO NA BARRA LATERAL ---
+#data
 st.sidebar.header("Painel de Controlo")
 model_choice = st.sidebar.selectbox(
     'Escolha o Modelo de Previsão',
@@ -101,7 +101,7 @@ future_steps = st.sidebar.slider('Horizonte de Previsão (meses)', 12, 60, 36, 1
 precip_modifier = st.sidebar.slider('Modificador de Precipitação (%)', -50, 50, -30, 5, format='%d%%') / 100.0 + 1.0
 temp_modifier = st.sidebar.slider('Modificador de Temperatura (°C)', -2.0, 5.0, 1.5, 0.5, format='%.1f°C')
 
-# --- LÓGICA DE TREINO E SIMULAÇÃO (Refatorada) ---
+#training
 st.header(f"Visualização da Simulação com {model_choice}")
 
 # Bloco de lógica para o XGBoost
@@ -169,7 +169,7 @@ else: # LSTM
     forecast_cenario = create_lstm_forecast(precip_modifier, temp_modifier)
 
 
-# --- GERAÇÃO E EXIBIÇÃO DO GRÁFICO COM PLOTLY ---
+#grafico
 fig = go.Figure()
 
 scenario_name = f'Cenário: {precip_modifier*100-100:+.0f}% Chuva, {temp_modifier:+.1f}°C Temp.'
@@ -190,5 +190,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 st.markdown("Desenvolvido no âmbito do Projeto Sentinela do Rio Doce - Marista Colatina")
+st.markdown("Desenvolvido pelo Professor Me. Guilherme Schultz Netto")
 st.image("grafico_3_editado.png")
+
 
