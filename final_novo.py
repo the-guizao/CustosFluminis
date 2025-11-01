@@ -22,7 +22,6 @@ final_df = final_df[['date', 'ndvi', 'precipitacao_total_mes', 'temp_media_mes',
 final_df = final_df.set_index('date').dropna()
 print(f"\n{len(final_df)} meses com dados completos para análise.")
 
-# --- PASSO 2: PREPARAÇÃO E TREINAMENTO DO MODELO XGBOOST ---
 print("\nIniciando preparação e treinamento do modelo XGBoost...")
 
 df_model = final_df.reset_index().copy()
@@ -39,7 +38,6 @@ print("Modelo XGBoost treinado com sucesso!")
 # Adiciona a previsão sobre os dados históricos (ajuste) ao dataframe
 df_model['xgb_fit'] = model.predict(X)
 
-# --- PASSO 3: IA EXPLICÁVEL (XAI) COM SHAP ---
 print("\nIniciando análise de interpretabilidade com SHAP...")
 
 explainer = shap.TreeExplainer(model)
@@ -57,8 +55,6 @@ shap.summary_plot(shap_values, X, plot_type='bar', show=False)
 plt.savefig('grafico_shap_summary_bar.png', dpi=300, bbox_inches='tight')
 plt.show()
 
-
-# --- PASSO 4: GÊMEO DIGITAL - SIMULAÇÃO DE CENÁRIOS ---
 print("\nIniciando simulação de cenários climáticos...")
 
 future_steps = 36
@@ -94,10 +90,7 @@ forecast_cenario = run_simulation(scenario_name, precip_modifier, temp_modifier)
 print("Gerando gráfico de comparação de cenários...")
 plt.figure(figsize=(18, 9))
 plt.plot(df_model['date'], df_model['ndvi'], label='NDVI Observado', marker='o', linestyle='None', alpha=0.5)
-# ==============================================================================
-# >>>>> LINHA ADICIONADA AQUI <<<<<
 plt.plot(df_model['date'], df_model['xgb_fit'], label='Ajuste XGBoost (Histórico)', color='purple', linestyle='-')
-# ==============================================================================
 plt.plot(forecast_normal.index, forecast_normal, label='Previsão (Cenário Normal)', linestyle='--', color='blue')
 plt.plot(forecast_cenario.index, forecast_cenario, label=scenario_name, linestyle='--', color='red')
 plt.title('Gêmeo Digital: Simulação de Cenários Climáticos Futuros para o NDVI com XGBoost', fontsize=16)
@@ -105,5 +98,6 @@ plt.xlabel('Data'); plt.ylabel('NDVI'); plt.axvline(x=df_model['date'].max(), co
 plt.legend(); plt.grid(True, linestyle='--', alpha=0.6)
 plt.savefig('grafico_simulacao_cenarios_xgboost.png', dpi=300, bbox_inches='tight')
 plt.show()
+
 
 print("\nFim do Projeto!")
