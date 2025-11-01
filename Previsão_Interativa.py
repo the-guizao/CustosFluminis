@@ -1,14 +1,3 @@
-# ==============================================================================
-# PROJETO SENTINELA DO RIO DOCE - DASHBOARD INTERATIVO v2.1
-# ==============================================================================
-# Versão refatorada para maior robustez do código de simulação,
-# corrigindo o erro de 'KeyError' e melhorando a legibilidade.
-#
-# Para executar:
-# 1. Instale: pip install streamlit pandas xgboost scikit-learn tensorflow plotly
-# 2. Execute: streamlit run dashboard.py
-# ==============================================================================
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -198,6 +187,7 @@ st.markdown("---")
 st.markdown("Desenvolvido no âmbito do Projeto Sentinela do Rio Doce - Marista Colatina")
 st.markdown("Desenvolvido pelo Professor Me. Guilherme Schultz Netto")
 st.image("grafico_3_editado.png")
+
 
 
 
