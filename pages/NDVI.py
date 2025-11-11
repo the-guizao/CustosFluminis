@@ -1,0 +1,10 @@
+import streamlit as st
+st.header("O NDVI")
+st.write("O NDVI (sigla em inglês para Normalized Difference Vegetation Index, ou índice de vegetação por diferença normalizada) é uma métrica essencial para avaliar a saúde das lavouras a partir de imagens de satélite. Ele mostra o estado das plantas com base na quantidade de luz de diferentes comprimentos de onda que elas absorvem e refletem — sem a necessidade de visitas frequentes ao campo.")
+# st.latex("\text{NDVI}= \frac{\text{NIR}-\text{Red}}{\text{NIR}+\text{Red}} \text{ com } \text{NDVI}\in\left[-1,1\right]")
+st.write(" Entender o que é NDVI na agricultura e como ele funciona permite que agrônomos monitorem o desenvolvimento das culturas ao longo das estações, identifiquem sinais precoces de estresse e planejem intervenções antes que os danos se tornem graves. Uma queda repentina nos valores de NDVI pode indicar estresse hídrico, pragas, doenças ou deficiências nutricionais. No entanto, nem toda queda no índice representa um problema: processos naturais como colheita ou senescência (envelhecimento das folhas) também reduzem os valores do NDVI.")
+st.image("pages/ndvi_cola.png")
+st.markdown("NDVI na Região de Colatina - Fonte: Os Autores")
+st.image("pages/ndvi_belem.png")
+st.markdown("NDVI na Região de Belém - Fonte: Os Autores")
+st.markdown("Exercício: Por que o Rio Doce é mostrado em vermelho enquanto o Amazonas está alaranjado?")

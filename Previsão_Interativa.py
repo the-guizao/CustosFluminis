@@ -14,7 +14,7 @@ st.set_page_config(layout="wide", page_title="Custos Fluminis")
 
 st.title("🛰️ Custos Fluminis: Dashboard Interativo")
 st.markdown("Uma ferramenta para simulação de cenários climáticos futuros para a saúde da vegetação (NDVI) da APP de Colatina, ES.")
-
+st.logo('logo.png', size="large", link=None, icon_image=None)
 #cache
 @st.cache_data
 def load_data(file_path):
@@ -185,9 +185,8 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 st.markdown("Desenvolvido no âmbito do Projeto Sentinela do Rio Doce - Marista Colatina")
-st.markdown("Desenvolvido pelo Professor Me. Guilherme Schultz Netto")
-st.image("grafico_3_editado.png")
-
+st.markdown("Desenvolvido pelo Professor Me. Guilherme Schultz Netto e Alunos: Daniel Zanetti & Kissila Dutra")
+st.image("logo.png")
 
 
 
